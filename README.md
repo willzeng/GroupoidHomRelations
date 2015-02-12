@@ -1,6 +1,9 @@
 # GroupoidHomRelations
 Short mathematica code to generate groupoid homomorphisms in the category of relations.
 
+
+
+--------------------------
 Available under MIT LICENSE:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
