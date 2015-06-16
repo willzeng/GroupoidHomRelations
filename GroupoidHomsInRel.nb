@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     75189,       2371]
-NotebookOptionsPosition[     72942,       2294]
-NotebookOutlinePosition[     73286,       2309]
-CellTagsIndexPosition[     73243,       2306]
+NotebookDataLength[     76211,       2402]
+NotebookOptionsPosition[     73926,       2324]
+NotebookOutlinePosition[     74268,       2339]
+CellTagsIndexPosition[     74225,       2336]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -514,7 +514,8 @@ Cell[BoxData[
   Editable->False]], "Print",
  CellChangeTimes->{{3.6311037747211704`*^9, 3.631103800180673*^9}, 
    3.6311040627493305`*^9, 3.6311041654574676`*^9, 3.6311042488304224`*^9, 
-   3.631104637383603*^9, {3.632734058093494*^9, 3.6327340636738296`*^9}}]
+   3.631104637383603*^9, {3.632734058093494*^9, 3.6327340636738296`*^9}, 
+   3.6434450350442305`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -525,145 +526,158 @@ Cell["Search for Monoid Homomorphisms", "Section",
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{
+  RowBox[{
+   RowBox[{
+   "Print", "[", 
+    "\"\<Note that this outputs a Monoid Homomorphism that is surjective on \
+objects.\n\tIf you are interested in a classical function, you will need to \
+take the relational \n\tconverse of this output.  See arXiv:1503.05857\>\"", 
+    "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
    "All", " ", "possible", " ", "pairs", " ", "of", " ", "elements", " ", 
     "one", " ", "in", " ", "domain", " ", "and", " ", "one", " ", "in", " ", 
-    "coDomain"}], " ", "*)"}], "\[IndentingNewLine]", 
+    "coDomain"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{
+   RowBox[{"pairings", " ", "=", " ", 
+    RowBox[{"Tuples", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"nD", "-", "1"}]}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"ncoD", "-", "1"}]}], "]"}]}], "}"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
    RowBox[{
-    RowBox[{"pairings", " ", "=", " ", 
-     RowBox[{"Tuples", "[", 
-      RowBox[{"{", 
+   "Specify", " ", "the", " ", "range", " ", "of", " ", "relations", " ", 
+    "to", " ", "search", " ", "over"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "They", " ", "are", " ", "defined", " ", "as", " ", "binary", " ", 
+    "strings", " ", "from", " ", "0", " ", "to", " ", 
+    SuperscriptBox["2", 
+     RowBox[{"nD", "*", "ncoD"}]], " ", "and"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"searched", " ", "sequentially"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "BE", " ", "SURE", " ", "TO", " ", "HARD", " ", "CODE", " ", "IN", " ", 
+    "THE", " ", "UNITALITY", " ", "CONDITION"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"start", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"end", " ", "=", " ", 
+   SuperscriptBox["2", 
+    RowBox[{"nD", "*", "ncoD"}]]}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"MAX", " ", "is", " ", 
+    SuperscriptBox["2", 
+     RowBox[{"nD", "*", "ncoD"}]]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"results", " ", "=", " ", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"i", "=", "start"}], ",", 
+   RowBox[{"i", "<", "end"}], ",", 
+   RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "We", " ", "use", " ", "binary", " ", "numbers", " ", "to", " ", "index", 
+     " ", "the", " ", "different", " ", "possible", " ", "relations"}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "where", " ", "a", " ", "0", " ", "or", " ", "a", " ", "1", " ", 
+     "indicates", " ", "if", " ", "one", " ", "of", " ", "the", " ", "nD", 
+     "*", "ncoD", " ", "pairings", " ", "is", " ", "present"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"binaryIndex", " ", "=", 
+     RowBox[{"PadLeft", "[", 
+      RowBox[{
+       RowBox[{"IntegerDigits", "[", 
+        RowBox[{"i", ",", "2"}], "]"}], ",", 
+       RowBox[{"nD", "*", "ncoD"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"relation", "=", 
+     RowBox[{"Map", "[", 
+      RowBox[{
        RowBox[{
-        RowBox[{"Range", "[", 
-         RowBox[{"0", ",", 
-          RowBox[{"nD", "-", "1"}]}], "]"}], ",", 
-        RowBox[{"Range", "[", 
-         RowBox[{"0", ",", 
-          RowBox[{"ncoD", "-", "1"}]}], "]"}]}], "}"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "Specify", " ", "the", " ", "range", " ", "of", " ", "relations", " ", 
-     "to", " ", "search", " ", "over"}], " ", "*)"}], "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "They", " ", "are", " ", "defined", " ", "as", " ", "binary", " ", 
-     "strings", " ", "from", " ", "0", " ", "to", " ", 
-     SuperscriptBox["2", 
-      RowBox[{"nD", "*", "ncoD"}]], " ", "and"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{"searched", " ", "sequentially"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "BE", " ", "SURE", " ", "TO", " ", "HARD", " ", "CODE", " ", "IN", " ", 
-     "THE", " ", "UNITALITY", " ", "CONDITION"}], " ", "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"start", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"end", " ", "=", " ", 
-     SuperscriptBox["2", 
-      RowBox[{"nD", "*", "ncoD"}]]}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{"MAX", " ", "is", " ", 
-     SuperscriptBox["2", 
-      RowBox[{"nD", "*", "ncoD"}]]}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"results", " ", "=", " ", 
-     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{"For", "[", 
-    RowBox[{
-     RowBox[{"i", "=", "start"}], ",", 
-     RowBox[{"i", "<", "end"}], ",", 
-     RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"(*", " ", 
+        RowBox[{
+        "pairings", "\[LeftDoubleBracket]", "#", "\[RightDoubleBracket]"}], 
+        "&"}], ",", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"binaryIndex", ",", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Check", " ", "the", " ", "unitality", " ", "condition"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     StyleBox[
       RowBox[{
-      "We", " ", "use", " ", "binary", " ", "numbers", " ", "to", " ", 
-       "index", " ", "the", " ", "different", " ", "possible", " ", 
-       "relations"}], " ", "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "where", " ", "a", " ", "0", " ", "or", " ", "a", " ", "1", " ", 
-       "indicates", " ", "if", " ", "one", " ", "of", " ", "the", " ", "nD", 
-       "*", "ncoD", " ", "pairings", " ", "is", " ", "present"}], " ", "*)"}],
-      "\[IndentingNewLine]", 
+      "BE", " ", "SURE", " ", "TO", " ", "HARD", " ", "CODE", " ", "IN", " ", 
+       "THE", " ", "UNITALITY", " ", "CONDITION", " ", "HERE"}],
+      FontColor->RGBColor[0, 1, 0]], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"unitalCondition", "=", 
      RowBox[{
-      RowBox[{"binaryIndex", " ", "=", 
-       RowBox[{"PadLeft", "[", 
-        RowBox[{
-         RowBox[{"IntegerDigits", "[", 
-          RowBox[{"i", ",", "2"}], "]"}], ",", 
-         RowBox[{"nD", "*", "ncoD"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{"relation", "=", 
-       RowBox[{"Map", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{
-          "pairings", "\[LeftDoubleBracket]", "#", "\[RightDoubleBracket]"}], 
-          "&"}], ",", 
-         RowBox[{"Flatten", "[", 
-          RowBox[{"Position", "[", 
-           RowBox[{"binaryIndex", ",", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{"Check", " ", "the", " ", "unitality", " ", "condition"}], " ",
-        "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
+      RowBox[{"Union", "[", 
        StyleBox[
         RowBox[{
-        "BE", " ", "SURE", " ", "TO", " ", "HARD", " ", "CODE", " ", "IN", 
-         " ", "THE", " ", "UNITALITY", " ", "CONDITION", " ", "HERE"}],
-        FontColor->RGBColor[0, 1, 0]], "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"unitalCondition", "=", 
-       RowBox[{
-        RowBox[{"Union", "[", 
-         StyleBox[
-          RowBox[{
-           RowBox[{"eval", "[", 
-            RowBox[{"relation", ",", "0"}], "]"}], ",", 
-           RowBox[{"eval", "[", 
-            RowBox[{"relation", ",", "2"}], "]"}]}],
-          FontColor->RGBColor[0, 1, 0]], "]"}], "\[Equal]", 
-        StyleBox[
-         RowBox[{"{", 
-          RowBox[{"0", ",", "2"}], "}"}],
-         FontColor->RGBColor[0, 1, 0]]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"eval", "[", 
+          RowBox[{"relation", ",", "0"}], "]"}], ",", 
+         RowBox[{"eval", "[", 
+          RowBox[{"relation", ",", "2"}], "]"}]}],
+        FontColor->RGBColor[0, 1, 0]], "]"}], "\[Equal]", 
+      StyleBox[
+       RowBox[{"{", 
+        RowBox[{"0", ",", "2"}], "}"}],
+       FontColor->RGBColor[0, 1, 0]]}]}], ";", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Return", " ", "True", " ", "if", " ", "both", " ", "the", " ", 
+      "unitality", " ", "condition", " ", "and", " ", "preservation", " ", 
+      "of", " ", "monoid", " ", "mult", " ", "are", " ", "met"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"unitalCondition", "&&", 
+       RowBox[{"isMonHom", "[", "relation", "]"}]}], ",", 
       "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-       "Return", " ", "True", " ", "if", " ", "both", " ", "the", " ", 
-        "unitality", " ", "condition", " ", "and", " ", "preservation", " ", 
-        "of", " ", "monoid", " ", "mult", " ", "are", " ", "met"}], "*)"}], 
-      "\[IndentingNewLine]", 
-      RowBox[{"If", "[", 
-       RowBox[{
-        RowBox[{"unitalCondition", "&&", 
-         RowBox[{"isMonHom", "[", "relation", "]"}]}], ",", 
-        "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"Print", "[", "relation", "]"}], ";", "\[IndentingNewLine]", 
-         RowBox[{"results", " ", "=", " ", 
-          RowBox[{"Append", "[", 
-           RowBox[{"results", ",", "relation"}], "]"}]}], ";"}]}], 
-       "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
-    "]"}]}]}]], "Input",
+      RowBox[{
+       RowBox[{"Print", "[", "relation", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"results", " ", "=", " ", 
+        RowBox[{"Append", "[", 
+         RowBox[{"results", ",", "relation"}], "]"}]}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+  "]"}]}], "Input",
  CellChangeTimes->CompressedData["
-1:eJxTTMoPSmViYGAQBmIQvadNZ+5x3teOu54ozAPTEycuAtESwZlLQXRYyo6N
+1:eJxTTMoPSmViYGAQAWIQvadNZ+5x3teOu54ozAPTEycuAtESwZlLQXRYyo6N
 IDr35PcTINqh0+gFiL76/iyY/hi0+y2IDnHf9QVEv7CI+gmirVRKfoPoRSKJ
 DCeAtKtiOZheVOAnBqI9+0TFQXSOr5YCiNbZLKEEoh+8nREAogVKboDpV6cZ
 Q0H0kXwmMH1r/f8aEM02a3MtiJYr+TEZRPvoqk8B0ZU/q7lPgsSPbwHTYjpv
 nUB0gdpEZxAdfH4xyykgneT6G0xH1AR/eCwA1J+k/x9E//nyh/UJkE6b3igA
-orMEH4iD6EPn+mRBNADF1JeK
+orMEH4iD6EPn+mRB9Ly6p7cDVV87PrKzeAKiAYxjn+c=
   "]],
 
 Cell[CellGroupData[{
 
+Cell[BoxData["\<\"Note that this outputs a Monoid Homomorphism that is \
+surjective on objects.\\n\\tIf you are interested in a classical function, \
+you will need to take the relational \\n\\tconverse of this output.  See \
+arXiv:1503.05857\"\>"], "Print",
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450382054195`*^9}],
+
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
@@ -675,7 +689,8 @@ Cell[BoxData[
     RowBox[{"3", ",", "1"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "3"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.643445038239427*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -688,7 +703,8 @@ Cell[BoxData[
     RowBox[{"3", ",", "1"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "2"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.6327344453727922`*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450382444215`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -701,7 +717,8 @@ Cell[BoxData[
     RowBox[{"3", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "3"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734445375791*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450382494216`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -714,7 +731,8 @@ Cell[BoxData[
     RowBox[{"3", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "2"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.6327344453778114`*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450382534213`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -727,7 +745,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "1"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.6327344461888375`*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.643445039814514*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -740,7 +759,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "0"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734446195839*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450398255153`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -753,7 +773,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "1"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.6327344462608423`*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450399105215`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -766,7 +787,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "0"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734446267844*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450399215217`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -779,7 +801,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "2"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "3"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.6327344489369965`*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450446908045`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -792,7 +815,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "2"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "2"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734448940997*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.643445044695805*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -805,7 +829,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "2"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "3"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734449181012*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450450788307`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -818,7 +843,8 @@ Cell[BoxData[
     RowBox[{"2", ",", "2"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"3", ",", "2"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734449183011*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.643445045083829*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -831,7 +857,8 @@ Cell[BoxData[
     RowBox[{"1", ",", "1"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"1", ",", "3"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734450456086*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450472679586`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -844,7 +871,8 @@ Cell[BoxData[
     RowBox[{"1", ",", "1"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"1", ",", "2"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734450569091*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450474389715`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -857,7 +885,8 @@ Cell[BoxData[
     RowBox[{"1", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"1", ",", "3"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.6327344508821096`*^9}}],
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.643445047968003*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -870,7 +899,8 @@ Cell[BoxData[
     RowBox[{"1", ",", "0"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"1", ",", "2"}], "}"}]}], "}"}]], "Print",
- CellChangeTimes->{{3.632734429616887*^9, 3.632734450990114*^9}}]
+ CellChangeTimes->{{3.632734429616887*^9, 3.6327344453707933`*^9}, 
+   3.6434450481390114`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -2292,8 +2322,8 @@ Cell[BoxData[{
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1680, 967},
-WindowMargins->{{Automatic, 1358}, {-8, Automatic}},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
 StyleDefinitions->"Default.nb"
 ]
@@ -2318,59 +2348,60 @@ Cell[CellGroupData[{
 Cell[13073, 357, 105, 1, 70, "Section"],
 Cell[CellGroupData[{
 Cell[13203, 362, 5716, 143, 555, "Input"],
-Cell[18922, 507, 516, 9, 23, "Print"]
+Cell[18922, 507, 544, 10, 23, "Print"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[19487, 522, 118, 1, 70, "Section"],
+Cell[19515, 523, 118, 1, 70, "Section"],
 Cell[CellGroupData[{
-Cell[19630, 527, 5509, 135, 552, "Input"],
+Cell[19658, 528, 5653, 141, 632, "Input"],
 Cell[CellGroupData[{
-Cell[25164, 666, 356, 11, 23, "Print"],
-Cell[25523, 679, 356, 11, 23, "Print"],
-Cell[25882, 692, 354, 11, 23, "Print"],
-Cell[26239, 705, 356, 11, 23, "Print"],
-Cell[26598, 718, 356, 11, 23, "Print"],
-Cell[26957, 731, 354, 11, 23, "Print"],
-Cell[27314, 744, 356, 11, 23, "Print"],
-Cell[27673, 757, 354, 11, 23, "Print"],
-Cell[28030, 770, 356, 11, 23, "Print"],
-Cell[28389, 783, 354, 11, 23, "Print"],
-Cell[28746, 796, 354, 11, 23, "Print"],
-Cell[29103, 809, 354, 11, 23, "Print"],
-Cell[29460, 822, 354, 11, 23, "Print"],
-Cell[29817, 835, 354, 11, 23, "Print"],
-Cell[30174, 848, 356, 11, 23, "Print"],
-Cell[30533, 861, 354, 11, 23, "Print"]
+Cell[25336, 673, 353, 5, 62, "Print"],
+Cell[25692, 680, 382, 12, 23, "Print"],
+Cell[26077, 694, 384, 12, 23, "Print"],
+Cell[26464, 708, 384, 12, 23, "Print"],
+Cell[26851, 722, 384, 12, 23, "Print"],
+Cell[27238, 736, 382, 12, 23, "Print"],
+Cell[27623, 750, 384, 12, 23, "Print"],
+Cell[28010, 764, 384, 12, 23, "Print"],
+Cell[28397, 778, 384, 12, 23, "Print"],
+Cell[28784, 792, 384, 12, 23, "Print"],
+Cell[29171, 806, 382, 12, 23, "Print"],
+Cell[29556, 820, 384, 12, 23, "Print"],
+Cell[29943, 834, 382, 12, 23, "Print"],
+Cell[30328, 848, 384, 12, 23, "Print"],
+Cell[30715, 862, 384, 12, 23, "Print"],
+Cell[31102, 876, 382, 12, 23, "Print"],
+Cell[31487, 890, 384, 12, 23, "Print"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30936, 878, 192, 2, 49, "Subsection"],
+Cell[31920, 908, 192, 2, 49, "Subsection"],
 Cell[CellGroupData[{
-Cell[31153, 884, 6270, 175, 361, "Input"],
-Cell[37426, 1061, 2683, 82, 72, "Output"],
-Cell[40112, 1145, 648, 9, 31, "Output"]
+Cell[32137, 914, 6270, 175, 361, "Input"],
+Cell[38410, 1091, 2683, 82, 72, "Output"],
+Cell[41096, 1175, 648, 9, 31, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[40809, 1160, 111, 1, 49, "Subsection"],
-Cell[40923, 1163, 735, 25, 72, "Output"]
+Cell[41793, 1190, 111, 1, 49, "Subsection"],
+Cell[41907, 1193, 735, 25, 72, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[41695, 1193, 111, 1, 49, "Subsection"],
-Cell[41809, 1196, 1497, 48, 81, "Print"]
+Cell[42679, 1223, 111, 1, 49, "Subsection"],
+Cell[42793, 1226, 1497, 48, 81, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43343, 1249, 169, 2, 49, "Subsection"],
-Cell[43515, 1253, 4787, 168, 309, "Print"]
+Cell[44327, 1279, 169, 2, 49, "Subsection"],
+Cell[44499, 1283, 4787, 168, 309, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[48339, 1426, 155, 2, 49, "Subsection"],
-Cell[48497, 1430, 4841, 169, 309, "Print"]
+Cell[49323, 1456, 155, 2, 49, "Subsection"],
+Cell[49481, 1460, 4841, 169, 309, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[53375, 1604, 205, 2, 49, "Subsection"],
-Cell[53583, 1608, 19331, 682, 917, "Print"]
+Cell[54359, 1634, 205, 2, 49, "Subsection"],
+Cell[54567, 1638, 19331, 682, 917, "Print"]
 }, Open  ]]
 }, Open  ]]
 }
