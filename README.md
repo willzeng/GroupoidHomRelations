@@ -1,6 +1,7 @@
 # GroupoidHomRelations
 Short mathematica code to generate groupoid homomorphisms in the category of relations.
 
+This software was written to accompany the paper *Models of Quantum Algorithms in Sets and Relations* [http://arxiv.org/abs/1503.05857] (http://arxiv.org/abs/1503.05857).
 
 
 --------------------------
